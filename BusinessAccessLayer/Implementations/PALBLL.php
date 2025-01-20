@@ -20,6 +20,19 @@ class PALBLL implements IPALBLL {
          
 
     }
+
+    public function GetSingle($id)
+    {
+      $retrunvalue= $this->dal->GetSingle($id);
+      return  $retrunvalue;
+    }
+
+    public function UpdateData($data)
+    {
+      $retrunvalue= $this->dal->UpdateData($data);
+      return  $retrunvalue;
+    }
+
   }
   
 ?>

@@ -109,8 +109,8 @@ if ($_SESSION["loggedin"]!=true)
 <!-- REQUIRED SCRIPTS -->
 <?php include(__DIR__ . '\common\requiredscripts.php'); ?>
 <!-- REQUIRED SCRIPTS -->
+<script src="./appjs/script.js"></script>
 
-<script src="./assets/js/adminlte.min.js"></script>
 <script>
 
   $(function () {

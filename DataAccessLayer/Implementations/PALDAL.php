@@ -39,6 +39,44 @@ class PALDAL implements IPALDAL {
          return $out;
 
     }
+    
+     public function UpdateData($data)
+     {
+      $out=array();
+      $conn =GetConnection();
+      $update = $conn->query("UPDATE `palmaster` set `palformula` = '{$data['palformula']}' where rowid = '{$data['rowid']}'");
+    if($update){
+      $out['status'] = 'success';
+    }else{
+      $out['status'] = 'failed';
+      $out['msg'] = 'An error occured while saving the data. Error: '.$conn->error;
+      }
+      return $out;
+
+     }
+
+    public function GetSingle($id)
+    {
+      $conn =GetConnection();
+      
+      $search_where = " where ";
+      $search_where .= " rowid = '{$id}' ";
+         
+
+      $query = $conn->query("SELECT * FROM `palmaster` {$search_where}");
+      $recordsFilterCount = $conn->query("SELECT * FROM `palmaster` {$search_where} ")->num_rows;
+
+      $out=array();
+      if($query){
+        $out['status'] = 'success';
+        $out['data'] = $query->fetch_array();
+    }else{
+        $out['status'] = 'success';
+        $out['error'] = 'An error occured while fetching the data. Error: '.$conn->error;
+    }
+
+       return $out;
+    }
 
    
   }

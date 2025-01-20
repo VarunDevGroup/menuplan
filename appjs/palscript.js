@@ -25,12 +25,16 @@ $(function() {
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                url: "./BFF/get_pal.php",
-                method: 'POST'
-            },
-            columns: [{
-                    data: 'rowid'
+                url: "../BFF/palBFF.php",
+                method: 'POST',
+                data: {
+                    actiontype:"GetList"
                 },
+            },
+            columns: [
+                //{
+                //    data: 'rowid'
+                //},
                 {
                     data: 'palname'
                 },
@@ -46,29 +50,21 @@ $(function() {
                         return '<a class="btn btn-warning btn-sm edit_data" href="javascript:void(0)" data-id="' + (row.rowid) + '"><i class="fas fa-edit"></i>Edit</a>';
                     }
                 }
-                ,
-                {
-                    data: null,
-                    orderable: false,
-                    className: 'text-center',
-                    render: function(data, type, row, meta) {
-                        
-                        return '<a class="btn btn-danger btn-sm  delete_data btn-danger" href="javascript:void(0)" data-id="' + (row.rowid) + '"> <i class="fas fa-eraser"></i>Delete</a>';
-                    }
-                }
+               
                 
             ],
             drawCallback: function(settings) {
                 $('.edit_data').click(function() {
                     $.ajax({
-                        url: 'get_single.php',
-                        data: { id: $(this).attr('data-id') },
+                        url: '../BFF/palBFF.php',
+                        data: { id: $(this).attr('data-id'),actiontype:"GetSingle" },
                         method: 'POST',
                         dataType: 'json',
                         error: err => {
                             alert("An error occured while fetching single data")
                         },
                         success: function(resp) {
+                       
                             if (!!resp.status) {
                                 Object.keys(resp.data).map(k => {
                                     if ($('#edit_modal').find('input[name="' + k + '"]').length > 0)
@@ -165,15 +161,16 @@ $(function() {
             })
         })
         // Update Data
-    $('#edit-author-frm').submit(function(e) {
+    $('#edit-frm').submit(function(e) {
         
             e.preventDefault()
             $('#edit_modal button').attr('disabled', true)
-            $('#edit_modal button[form="edit-author-frm"]').text("saving ...")
+            $('#edit_modal button[form="edit-frm"]').text("saving ...")
            
             $.ajax({
-                url: 'update_data.php',
+                url: '../BFF/palBFF.php',
                 data: $(this).serialize(),
+                
                 method: 'POST',
                 dataType: "json",
               
@@ -184,7 +181,7 @@ $(function() {
                             _el.hide()
                             _el.addClass('alert alert-primary alert_msg')
                             _el.text("Data successfully updated");
-                            $('#edit-author-frm').get(0).reset()
+                            $('#edit-frm').get(0).reset()
                             $('.modal').modal('hide')
                             $('#msg').append(_el)
                             _el.show('slow')
@@ -198,7 +195,7 @@ $(function() {
                             _el.hide()
                             _el.addClass('alert alert-danger alert_msg form-group')
                             _el.text(resp.msg);
-                            $('#edit-author-frm').append(_el)
+                            $('#edit-frm').append(_el)
                             _el.show('slow')
                         } else {
                             alert("An error occured. Please chech the source code and try again")
@@ -208,7 +205,7 @@ $(function() {
                     }
 
                     $('#edit_modal button').attr('disabled', false)
-                    $('#edit_modal button[form="edit-author-frm"]').text("Save")
+                    $('#edit_modal button[form="edit-frm"]').text("Save")
                 }
             })
         })
