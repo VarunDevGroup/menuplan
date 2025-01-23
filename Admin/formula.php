@@ -68,7 +68,7 @@ if ($_SESSION["loggedin"] != true) {
                   </div>
                 
 
-                  <table id="tblData" class="table table-bordered table-hover small">
+                  <table id="tblData" class="table table-bordered table-hover">
                     <thead class="bg-info medium">
                       <tr>
                        

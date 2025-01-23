@@ -76,7 +76,7 @@ if ($_SESSION["loggedin"] != true) {
                   </div><!-- /.col -->
 
 
-                  <table id="tblData" class="table table-bordered table-hover small">
+                  <table id="tblData" class="table table-bordered table-hover">
                   <thead class="bg-info medium">
                       <tr>
                         <th>Id</th>
@@ -87,15 +87,7 @@ if ($_SESSION["loggedin"] != true) {
                       </tr>
                     </thead>
 
-                    <tfoot>
-                      <tr>
-                        <th>Id</th>
-                        <th>Food Item</th>
-                        <th></th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </tfoot>
+                   
                   </table>
                 </div>
                 <!-- /.card-body -->

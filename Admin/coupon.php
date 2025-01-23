@@ -9,7 +9,6 @@ if ($_SESSION["loggedin"] != true) {
 ?>
 <?php include($_SERVER['DOCUMENT_ROOT'] . '\menuplan\common\header.php'); ?>
 
-
 <body class="hold-transition layout-top-nav layout-footer-fixed">
   <div class="wrapper">
 
@@ -29,7 +28,7 @@ if ($_SESSION["loggedin"] != true) {
               <ol class="breadcrumb float-sm-right">
                 <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
                 <li class="breadcrumb-item"><a href="admin.php">Admin</a></li>
-                <li class="breadcrumb-item active">PAL Master</li>
+                <li class="breadcrumb-item active">Coupon Master</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -47,9 +46,14 @@ if ($_SESSION["loggedin"] != true) {
                 <div class="card-header">
 
                 <div class="row mb-2">
-                    <div class="col-sm-10">
-                      <h3 class="card-title">Physical Activity Level</h3>
+                    <div class="col-sm-9">
+                      <h3 class="card-title">Coupon Management</h3>
                     </div><!-- /.col -->
+                    <div class="col-sm-1 text-right">
+                    <button type="button" class="btn btn-block bg-gradient-primary btn-sm"
+                    data-toggle="modal" data-target="#add_modal">Add New</button>
+
+                    </div>
                     <div class="col-sm-2">
                       <a class="btn btn-primary btn-sm" href="admin.php">
                         <i class="fas fa-long-arrow-alt-left">
@@ -66,7 +70,9 @@ if ($_SESSION["loggedin"] != true) {
                 <!-- /.card-header -->
                 <div class="card-body">
                   <div class="row">
-                    <div class="col-md-12" id="msg"></div>
+                    <div class="col-md-12" id="msg">
+                      
+                    </div>
                   </div>
                  
 
@@ -74,10 +80,12 @@ if ($_SESSION["loggedin"] != true) {
                   <thead class="bg-info">
                       <tr>
                      
-                        <th>PAL Name</th>
-                        <th>PAL Value</th>
-                        <th></th>
+                        <th>Coupon Code</th>
+                        <th>Valid Till</th>
+                        <th>Coupon Amount</th>
+                        <th>Coupon Used</th>
                        
+                        <th></th>
                       </tr>
                     </thead>
 
@@ -108,7 +116,7 @@ if ($_SESSION["loggedin"] != true) {
 <!-- REQUIRED SCRIPTS -->
 <?php include($_SERVER['DOCUMENT_ROOT'] . '\menuplan\common\requiredscripts.php'); ?>
 <!-- REQUIRED SCRIPTS -->
-<script src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/appjs/palscript.js"></script>
+<script src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/appjs/coupon.js"></script>
 
     <script>
       $(function() {
@@ -118,41 +126,43 @@ if ($_SESSION["loggedin"] != true) {
     </script>
 
     <!-- Add Modal -->
-   
-    <!-- Edit Modal -->
-    <div class="modal fade" id="edit_modal" data-bs-backdrop="static">
+    <div class="modal fade" id="add_modal" data-bs-backdrop="static">
       <div class="modal-dialog">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title">Edit PAL Details</h5>
-            <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close">X</button>
+            <h5 class="modal-title">Generate Coupon</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
           <div class="modal-body">
             <div class="container-fluid">
-              <form action="" id="edit-frm">
-                <input type="hidden" name="rowid">
-                <input type="hidden" name="actiontype" Value="UpdateData">
+              <form action="" id="new-frm">
+              <input type="hidden" name="actiontype" Value="InsertData">
                 <div class="form-group">
-                  <label for="palname" class="control-label">PAL Name</label>
-                  <input type="text" class="form-control rounded-0" readonly id="palname" name="palname" required>
-                </div>
-                <div class="form-group">
-                  <label for="palformula" class="control-label">PAL Value</label>
-                  <input type="number" min="0" class="form-control rounded-0" id="palformula" name="palformula" required>
-                </div>
+                  <label for="couponDiscount" class="control-label">Select Discount %</label>
+                  <select id="couponDiscount" name="couponDiscount" >
+   
+                      <option value=".25"> 25% off </option>
+                      <option value=".50"> 50% off</option>
+                      <option value=".75"> 75% off</option>
+                      <option value="1"> 100% off</option>
+                    </select>
+                 </div>
+               
               </form>
             </div>
           </div>
           <div class="modal-footer">
-            <button type="submit" class="btn btn-primary" form="edit-frm">Save</button>
+            <button type="submit" class="btn btn-primary" form="new-frm">Save</button>
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
           </div>
         </div>
       </div>
     </div>
-    <!-- /Edit Modal -->
-   
 
+   
+  
 
 </body>
 

@@ -1,5 +1,6 @@
 <?php
 
+use BusinessAccessLayer\Implementations\CouponBLL;
 use BusinessAccessLayer\Implementations\FoodItemsBLL;
 use BusinessAccessLayer\Implementations\FoodSectionBLL;
 use BusinessAccessLayer\Implementations\FormulaBLL;
@@ -9,6 +10,7 @@ use DataAccessLayer\Implementations\LanguageDAL;
 use BusinessAccessLayer\Implementations\LanguageBLL;
 use BusinessAccessLayer\Implementations\MasterDataBLL;
 use BusinessAccessLayer\Implementations\PALBLL;
+use DataAccessLayer\Implementations\CouponDAL;
 use DataAccessLayer\Implementations\FoodItemsDAL;
 use DataAccessLayer\Implementations\FoodSectionDAL;
 use DataAccessLayer\Implementations\FormulaDAL;
@@ -93,4 +95,18 @@ $container = new Container();
 	
 		return new FoodItemsBLL($db);
 	});
+
+	$container->set('couponDAL', function () {
+		return new CouponDAL();
+	});
+
+	$container->set('couponBLL', function ($container) {
+		
+		$db = $container->get('couponDAL');
+	
+		return new CouponBLL($db);
+	});
+
+
+	
 ?>

@@ -39,7 +39,7 @@
               <li><a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/admin/admin.php" class="dropdown-item">Coupon Master
               </a></li>
               <li><a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/admin/admin.php" class="dropdown-item">Diet Management</a></li>
-              <li><a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/admin/fooditems.php" class="dropdown-item">Food Management</a></li>
+              <li><a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/admin/foodsection.php" class="dropdown-item">Food Management</a></li>
               <li><a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/admin/formula.php" class="dropdown-item">Formula Configuration</a></li>
               <li><a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/admin/admin.php" class="dropdown-item">Image Repository</a></li>
               <li><a href="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/admin/MasterData.php" class="dropdown-item">Master Management</a></li>

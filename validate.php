@@ -20,7 +20,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 	{
 		
 		$_SESSION["loggedin"]=true;
-		//$_SESSION["userName"]=$uid;
+		$_SESSION["userName"]="1";
 		header('Location: home.php');
 	}
 	else

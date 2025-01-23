@@ -27,9 +27,9 @@ if ($_SESSION["loggedin"] != true) {
             </div><!-- /.col -->
             <div class="col-sm-6">
               <ol class="breadcrumb float-sm-right">
-                <li class="breadcrumb-item"><a href="#">Home</a></li>
-                <li class="breadcrumb-item"><a href="#">Layout</a></li>
-                <li class="breadcrumb-item active">Top Navigation</li>
+                <li class="breadcrumb-item"><a href="../home.php">Home</a></li>
+                <li class="breadcrumb-item"><a href="admin.php">Master Data</a></li>
+                <li class="breadcrumb-item active">Food Sections</li>
               </ol>
             </div><!-- /.col -->
           </div><!-- /.row -->
@@ -76,7 +76,7 @@ if ($_SESSION["loggedin"] != true) {
                   </div><!-- /.col -->
 
 
-                  <table id="tblData" class="table table-bordered table-hover small">
+                  <table id="tblData" class="table table-bordered table-hover">
                   <thead class="bg-info medium">
                       <tr>
                         <th>Id</th>
@@ -88,16 +88,7 @@ if ($_SESSION["loggedin"] != true) {
                       </tr>
                     </thead>
 
-                    <tfoot>
-                      <tr>
-                      <th>Id</th>
-                        <th>Section Name</th>
-                        <th></th>
-                        <th>Avg Gram Per Kal</th>
-                        <th></th>
-                        <th></th>
-                      </tr>
-                    </tfoot>
+                    
                   </table>
                 </div>
                 <!-- /.card-body -->

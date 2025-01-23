@@ -25,7 +25,7 @@ $(function() {
             "autoWidth": false,
             "responsive": true,
             "ajax": {
-                url: "../BFF/palBFF.php",
+                url: "../BFF/couponBFF.php",
                 method: 'POST',
                 data: {
                     actiontype:"GetList"
@@ -36,18 +36,32 @@ $(function() {
                 //    data: 'rowid'
                 //},
                 {
-                    data: 'palname'
+                    data: 'CouponCode'
                 },
                 {
-                    data: 'palformula'
+                    data: 'VaildityDate'
                 },
+                {
+                    data: 'CouponAmount'
+                },
+                {
+                    data: 'CouponUsed'
+                },
+               
                 {
                     data: null,
                     orderable: false,
                     className: 'text-center',
                     render: function(data, type, row, meta) {
-                        
-                        return '<a class="btn btn-warning btn-sm edit_data" href="javascript:void(0)" data-id="' + (row.rowid) + '"><i class="fas fa-edit"></i>Edit</a>';
+ 
+                        if(row.CouponUsed=="Yes")
+                        {
+                            return '<a class="btn btn-danger btn-sm disabled btn-danger"  href="javascript:void(0)" data-id="' + (row.CouponID) + '"><i class="fas fa-eraser"></i> Delete</a>';
+                        }
+                        else
+                        {
+                            return '<a class="btn btn-danger btn-sm  delete_data btn-danger" href="javascript:void(0)" data-id="' + (row.CouponID) + '"> <i class="fas fa-eraser"></i> Delete</a>';
+                        }
                     }
                 }
                
@@ -61,7 +75,7 @@ $(function() {
                         method: 'POST',
                         dataType: 'json',
                         error: err => {
-                            alert("An error occured while fetching single data")
+                            alert("An error occured. Please chech the source code and try again")
                         },
                         success: function(resp) {
                        
@@ -105,34 +119,38 @@ $(function() {
                 }
             }],
             "order": [
-                [0, "asc"]
+                [1, "asc"]
             ],
             initComplete: function(settings) {
-                $('.paginate_button').addClass('p-1')
+               // $('.paginate_button').addClass('p-1')
             }
         });
     }
     //Load Data
     load_data()
         //Saving new Data
-    $('#new-author-frm').submit(function(e) {
+    $('#new-frm').submit(function(e) {
+
             e.preventDefault()
-            $('#add_modal button').attr('disabled', true)
-            $('#add_modal button[form="new-author-frm"]').text("saving ...")
+        //    $('#add_modal button').attr('disabled', true)
+
+         //   $('#add_modal button[form="new-frm"]').text("saving ...")
+
             $.ajax({
-                url: 'save_data.php',
+                url: '../BFF/couponBFF.php',
                 data: $(this).serialize(),
                 method: 'POST',
                 dataType: "json",
                
                 success: function(resp) {
+                  
                     if (!!resp.status) {
                         if (resp.status == 'success') {
                             var _el = $('<div>')
                             _el.hide()
                             _el.addClass('alert alert-primary alert_msg')
                             _el.text("Data successfully saved");
-                            $('#new-author-frm').get(0).reset()
+                            $('#new-frm').get(0).reset()
                             $('.modal').modal('hide')
                             $('#msg').append(_el)
                             _el.show('slow')
@@ -146,7 +164,7 @@ $(function() {
                             _el.hide()
                             _el.addClass('alert alert-danger alert_msg form-group')
                             _el.text(resp.msg);
-                            $('#new-author-frm').append(_el)
+                            $('#new-frm').append(_el)
                             _el.show('slow')
                         } else {
                             alert("An error occured. Please chech the source code and try again")
@@ -156,9 +174,14 @@ $(function() {
                     }
 
                     $('#add_modal button').attr('disabled', false)
-                    $('#add_modal button[form="new-author-frm"]').text("Save")
-                }
+                    $('#add_modal button[form="new-frm"]').text("Save")
+                },
+                error: err => {
+                    alert("An error occured. Please chech the source code and try again")
+                },
+                
             })
+
         })
         // Update Data
     $('#edit-frm').submit(function(e) {
@@ -175,6 +198,7 @@ $(function() {
                 dataType: "json",
               
                 success: function(resp) {
+                    alert(resp);
                     if (!!resp.status) {
                         if (resp.status == 'success') {
                             var _el = $('<div>')

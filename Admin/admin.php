@@ -104,7 +104,7 @@ if ($_SESSION["loggedin"]!=true)
                             <div class="col-3">
                                 <img src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/dist/img/Coupon.jfif" style="width:100px;height:100px" />
                                 <br />
-                                <a href="">Coupon Master</a>
+                                <a href="coupon.php">Coupon Master</a>
                             </div>
                             <div class="col-3">
                                 <img src="<?php $_SERVER['DOCUMENT_ROOT'] ?>/menuplan/dist/img/Plan.jfif" style="width:100px;height:100px" />
